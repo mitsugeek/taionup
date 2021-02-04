@@ -9,7 +9,11 @@ use LINE\LINEBot\Constant\HTTPHeader;
 use LINE\LINEBot\SignatureValidator;
 use LINE\LINEBot\Event\FollowEvent;
 use LINE\LINEBot\Event\MessageEvent\TextMessage;
+use LINE\LINEBot\Event\MessageEvent\ImageMessage;
 use LINE\LINEBot\Event\MessageEvent\LocationMessage;
+use LINE\LINEBot\Event\MessageEvent\FileMessage;
+
+
 use LINE\LINEBot\Event\PostbackEvent;
 use LINE\LINEBot\Event\UnfollowEvent;
 
@@ -56,7 +60,15 @@ class WebhookController extends Controller
                 case $event instanceof TextMessage:
                     $reply_message = $event->getText()."(オウム返し)";
                     break;
-                
+
+                case $event instanceof ImageMessage:
+                    $reply_message = "画像を送りましたね。";
+                    break;
+
+                case $event instanceof FileMessage:
+                    $reply_message = "ファイルを送りましたね。";
+                    break;
+                    
                 //位置情報の受信
                 case $event instanceof LocationMessage:
                     $reply_message = "あなたの現在地：\n".$event->getAddress();
