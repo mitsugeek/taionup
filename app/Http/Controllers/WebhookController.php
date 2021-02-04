@@ -24,7 +24,7 @@ class WebhookController extends Controller
 
 
         logger()->info("getContent");
-        logger()->info($request->getContent());
+        logger()->info(print_r($request->getContent()));
         if (!SignatureValidator::validateSignature($request->getContent(), env('LINE_CHANNEL_SECRET'), $signature)) {
             logger()->warning("abort:400");
             abort(400);
