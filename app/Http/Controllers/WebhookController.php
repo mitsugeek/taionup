@@ -13,6 +13,9 @@ use LINE\LINEBot\Event\MessageEvent\ImageMessage;
 use LINE\LINEBot\Event\MessageEvent\LocationMessage;
 use LINE\LINEBot\Event\MessageEvent\FileMessage;
 use LINE\LINEBot\MessageBuilder\ImageMessageBuilder;
+use LINE\LINEBot\TemplateActionBuilder\PostbackTemplateActionBuilder;
+use LINE\LINEBot\MessageBuilder\TemplateBuilder\ButtonTemplateBuilder;
+use LINE\LINEBot\MessageBuilder\TemplateMessageBuilder;
 
 
 use LINE\LINEBot\Event\PostbackEvent;
@@ -95,6 +98,19 @@ class WebhookController extends Controller
                     logger()->info($url);
                     $bot->replyMessage($replyToken, new ImageMessageBuilder($url, $url));
 
+                    
+                    $reply_token = $event->getReplyToken();
+                    $bot->replyText($reply_token, "画像投稿ありがとうございます。");
+                                        
+                    $reply_token = $event->getReplyToken();
+                    $yes_button = new PostbackTemplateActionBuilder('はい', 'button=1');
+                    $no_button = new PostbackTemplateActionBuilder('キャンセル', 'button=0');
+                    $actions = [$yes_button, $no_button];
+                    $button = new ButtonTemplateBuilder('確認', '37.5℃以上ですか？', '', $actions);
+                    $button_message = new TemplateMessageBuilder('タイトル', $button);
+                    $bot->replyMessage($reply_token, $button_message);
+
+                    return "";
                     break;
 
                 case $event instanceof FileMessage:
