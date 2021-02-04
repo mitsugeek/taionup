@@ -102,7 +102,7 @@ class WebhookController extends Controller
                                         
                     $reply_token = $event->getReplyToken();
                     $yes_button = new PostbackTemplateActionBuilder('はい', 'button=1');
-                    $no_button = new PostbackTemplateActionBuilder('キャンセル', 'button=0');
+                    $no_button = new PostbackTemplateActionBuilder('いいえ', 'button=0');
                     $actions = [$yes_button, $no_button];
                     $button = new ButtonTemplateBuilder('確認', '37.5℃以上ですか？', '', $actions);
                     $button_message = new TemplateMessageBuilder('タイトル', $button);
@@ -127,10 +127,19 @@ class WebhookController extends Controller
                 //選択肢とか選んだ時に受信するイベント
                 case $event instanceof PostbackEvent:
 
-                    $bot->replyText(
-                        $event->getReplyToken(),
-                        'Got postback ' . $event->getPostbackData()
-                    );
+                    $postbackdata = $event->getPostbackData();
+                    if($postbackdata == "button=1"){
+                        $bot->replyText(
+                            $event->getReplyToken(),
+                            "今日は会社を休みましょう。"
+                        );
+                    } else if($postbackdata == "button=1"){
+                        $bot->replyText(
+                            $event->getReplyToken(),
+                            "出社可能な体温ですね。回答ありがとうございました。"
+                        );
+                    }
+
 
                     return "";
                     break;
