@@ -65,10 +65,10 @@ class WebhookController extends Controller
                 case $event instanceof ImageMessage:
                     $reply_message = "画像を送りましたね。";
 
-                    $replyToken = $this->imageMessage->getReplyToken();
-                    $contentProvider = $this->imageMessage->getContentProvider();
+                    $replyToken = $event->getReplyToken();
+                    $contentProvider = $event->getContentProvider();
                     if ($contentProvider->isExternal()) {
-                        $this->bot->replyMessage(
+                        $bot->replyMessage(
                             $replyToken,
                             new ImageMessageBuilder(
                                 $contentProvider->getOriginalContentUrl(),
@@ -78,8 +78,8 @@ class WebhookController extends Controller
                         return;
                     }
                     
-                    $contentId = $this->imageMessage->getMessageId();
-                    $image = $this->bot->getMessageContent($contentId)->getRawBody();
+                    $contentId = $event->getMessageId();
+                    $image = $bot->getMessageContent($contentId)->getRawBody();
             
                     $path = storage_path('app');
 
