@@ -13,7 +13,7 @@ use LINE\LINEBot\Event\MessageEvent\LocationMessage;
 use LINE\LINEBot\Event\PostbackEvent;
 use LINE\LINEBot\Event\UnfollowEvent;
 
-class LineWebhookController extends Controller
+class WebhookController extends Controller
 {
     public function webhook(Request $request)
     {
