@@ -81,10 +81,7 @@ class WebhookController extends Controller
                     $contentId = $event->getMessageId();
                     $image = $bot->getMessageContent($contentId)->getRawBody();
             
-                    $path = storage_path('app');
-
-                    $tempFilePath = tempnam(storage_path('app/public/'), "IMG_");
-
+                    $tempFilePath = storage_path('app/public/').md5(uniqid(rand(), true))."jpg";
                     $filePath = $tempFilePath . '.jpg';
                     $fh = fopen($filePath, 'x');
                     fwrite($fh, $image);
@@ -94,6 +91,8 @@ class WebhookController extends Controller
                     $filename = basename($filePath);
                     $url = env('APP_URL')
                     .\Illuminate\Support\Facades\Storage::url('app/public/'.$filename);
+
+                    logger()->info($url);
                     $bot->replyMessage($replyToken, new ImageMessageBuilder($url, $url));
 
                     break;
