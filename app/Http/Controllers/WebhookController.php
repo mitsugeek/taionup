@@ -21,7 +21,12 @@ class WebhookController extends Controller
         $bot = new LINEBot($httpClient, ['channelSecret' => env('LINE_CHANNEL_SECRET')]);
 
         $signature = $_SERVER['HTTP_'.HTTPHeader::LINE_SIGNATURE];
+
+
+        logger()->info("getContent");
+        logger()->info($request->getContent());
         if (!SignatureValidator::validateSignature($request->getContent(), env('LINE_CHANNEL_SECRET'), $signature)) {
+            logger()->warning("abort:400");
             abort(400);
         }
 
