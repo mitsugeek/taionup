@@ -90,7 +90,7 @@ class WebhookController extends Controller
 
                     $filename = basename($filePath);
                     $url = env('APP_URL')
-                    .\Illuminate\Support\Facades\Storage::url('app/public/'.$filename);
+                    .\Illuminate\Support\Facades\Storage::url($filename);
 
                     logger()->info($url);
                     $bot->replyMessage($replyToken, new ImageMessageBuilder($url, $url));
