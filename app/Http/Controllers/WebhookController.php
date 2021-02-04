@@ -126,6 +126,12 @@ class WebhookController extends Controller
 
                 //選択肢とか選んだ時に受信するイベント
                 case $event instanceof PostbackEvent:
+
+                    $bot->replyText(
+                        $event->getReplyToken(),
+                        'Got postback ' . $event->getPostbackData()
+                    );
+
                     return "";
                     break;
 
