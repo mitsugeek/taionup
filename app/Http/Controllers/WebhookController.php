@@ -47,18 +47,19 @@ class WebhookController extends Controller
                         $reply_message = "failed to get profile. skip processing.";
                     } else {
                         $profile = $rsp->getJSONDecodedBody();
-                        $reply_message = $line_id.$profile['displayName'];
+                        $reply_message = "lineID:".$line_id."\n"."displayName:".$profile['displayName'];
                     }
 
                     break;
                 
                 //メッセージの受信
                 case $event instanceof TextMessage:
-                    $reply_message = $event->getText();
+                    $reply_message = $event->getText()."(オウム返し)";
                     break;
                 
                 //位置情報の受信
                 case $event instanceof LocationMessage:
+                    $reply_message = "あなたの現在地：\n".$event->getAddress();
                     break;
 
                 //選択肢とか選んだ時に受信するイベント
