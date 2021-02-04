@@ -39,10 +39,22 @@ class WebhookController extends Controller
                 
                 //友達登録＆ブロック解除
                 case $event instanceof FollowEvent:
+
+                    $line_id = $event->getUserId();
+                    $rsp = $bot->getProfile($line_id);
+                    if (!$rsp->isSucceeded()) {
+                        logger()->info('failed to get profile. skip processing.');
+                        $reply_message = "failed to get profile. skip processing.";
+                    } else {
+                        $profile = $rsp->getJSONDecodedBody();
+                        $reply_message = $line_id.$profile['displayName'];
+                    }
+
                     break;
                 
                 //メッセージの受信
                 case $event instanceof TextMessage:
+                    $reply_message = $event->getText();
                     break;
                 
                 //位置情報の受信
