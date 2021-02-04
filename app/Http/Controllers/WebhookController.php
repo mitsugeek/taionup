@@ -97,7 +97,7 @@ class WebhookController extends Controller
                     .\Illuminate\Support\Facades\Storage::url($filename);
 
                     logger()->info($url);
-                    $bot->replyMessage($replyToken, new ImageMessageBuilder($url, $url));
+                    //$bot->replyMessage($replyToken, new ImageMessageBuilder($url, $url));
 
                                         
                     $reply_token = $event->getReplyToken();
