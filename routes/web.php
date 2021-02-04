@@ -16,3 +16,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return "hello world!";
 });
+
+
+Route::post('/line/Webhook', 'webhook@LineWebhookController');
