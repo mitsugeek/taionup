@@ -62,7 +62,14 @@ class WebhookController extends Controller
                 
                 //メッセージの受信
                 case $event instanceof TextMessage:
+
+                    $reply_token = $event->getReplyToken();
                     $reply_message = $event->getText()."(オウム返し)";
+                    $bot->replyText($reply_token, $reply_message);
+                    
+                    $reply_token = $event->getReplyToken();
+                    $reply_message = $event->getText()."(オウム返し)";
+                    $bot->replyText($reply_token, $reply_message);
                     break;
 
                 case $event instanceof ImageMessage:
