@@ -17,7 +17,6 @@ use LINE\LINEBot\TemplateActionBuilder\PostbackTemplateActionBuilder;
 use LINE\LINEBot\MessageBuilder\TemplateBuilder\ButtonTemplateBuilder;
 use LINE\LINEBot\MessageBuilder\TemplateMessageBuilder;
 
-
 use LINE\LINEBot\Event\PostbackEvent;
 use LINE\LINEBot\Event\UnfollowEvent;
 
@@ -66,15 +65,10 @@ class WebhookController extends Controller
                     $reply_token = $event->getReplyToken();
                     $reply_message = $event->getText()."(オウム返し)";
                     $bot->replyText($reply_token, $reply_message);
-                    
-                    $reply_token = $event->getReplyToken();
-                    $reply_message = $event->getText()."(オウム返し)";
-                    $bot->replyText($reply_token, $reply_message);
+                    return "";
                     break;
 
                 case $event instanceof ImageMessage:
-                    $reply_message = "画像を送りましたね。";
-
                     $replyToken = $event->getReplyToken();
                     $contentProvider = $event->getContentProvider();
                     if ($contentProvider->isExternal()) {
@@ -105,9 +99,6 @@ class WebhookController extends Controller
                     logger()->info($url);
                     $bot->replyMessage($replyToken, new ImageMessageBuilder($url, $url));
 
-                    
-                    $reply_token = $event->getReplyToken();
-                    $bot->replyText($reply_token, "画像投稿ありがとうございます。");
                                         
                     $reply_token = $event->getReplyToken();
                     $yes_button = new PostbackTemplateActionBuilder('はい', 'button=1');
