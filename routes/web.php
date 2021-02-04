@@ -19,7 +19,3 @@ Route::get('/', function () {
 
 
 Route::post('/line/Webhook', [App\Http\Controllers\WebhookController::class, 'webhook']);
-
-Route::get('/line/Webhook', function(){
-    return "<form action='Webhook' method='post'><input type='submit' /></form>";
-});
