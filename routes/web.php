@@ -18,6 +18,13 @@ Route::get('/', function () {
 });
 
 
-Route::post('/line/Webhook', [App\Http\Controllers\WebhookController::class, 'webhook']);
+Route::post('line/Webhook', [App\Http\Controllers\WebhookController::class, 'webhook']);
 
 Route::get('line/liff', [App\Http\Controllers\LiffController::class, 'home']);
+
+Route::post('line/getUser', [App\Http\Controllers\LiffController::class, 'getUserAPI']);
+
+Route::post('line/getSessionUser', function(){
+    $request = request();
+    return $request->session()->all(); 
+});

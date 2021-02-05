@@ -59,7 +59,8 @@ class WebhookController extends Controller
                         $reply_message = $profile['displayName']."さん\n"
                         ."お友達登録ありがとうございます。"
                         ."出勤前に、体温計で体温を測り、\n"
-                        ."測った画像を写真で取ってこのトーク画面で投稿をお願い致します。";
+                        ."写真で、体温を取り、\n"
+                        ."このトーク画面に投稿をお願い致します。";
                         
                         //$reply_message = "lineID:".$line_id."\n"."displayName:".$profile['displayName'];
                     }
