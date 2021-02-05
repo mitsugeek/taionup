@@ -17,6 +17,10 @@ use LINE\LINEBot\TemplateActionBuilder\PostbackTemplateActionBuilder;
 use LINE\LINEBot\MessageBuilder\TemplateBuilder\ButtonTemplateBuilder;
 use LINE\LINEBot\MessageBuilder\TemplateMessageBuilder;
 
+use App\Models\LineMessage;
+use App\Models\LinePhoto;
+use App\Models\LineUser;
+
 use LINE\LINEBot\Event\PostbackEvent;
 use LINE\LINEBot\Event\UnfollowEvent;
 
@@ -54,8 +58,16 @@ class WebhookController extends Controller
                         $reply_message = "failed to get profile. skip processing.";
 
                     } else {
-
                         $profile = $rsp->getJSONDecodedBody();
+
+                        $user = LineUser::where('line_id', $line_id)->first();
+                        if(!$user){
+                            $user = new LineUser();
+                            $user->line_id = $line_id;
+                            $user->line_name = $profile['displayName'];
+                            $user->save();
+                        }
+
                         $reply_message = $profile['displayName']."さん\n"
                         ."お友達登録ありがとうございます。"
                         ."出勤前に、体温計で体温を測り、\n"
@@ -69,14 +81,21 @@ class WebhookController extends Controller
                 
                 //メッセージの受信
                 case $event instanceof TextMessage:
+                    $line_id = $event->getUserId();
+                    $text = $event->getText();
+                    $message = new LineMessage();
+                    $message->line_id = $line_id;
+                    $message->message = $text;
+                    $message->save();
 
                     $reply_token = $event->getReplyToken();
-                    $reply_message = $event->getText()."(オウム返し)";
+                    $reply_message = $text."(オウム返し)";
                     $bot->replyText($reply_token, $reply_message);
                     return "";
                     break;
 
                 case $event instanceof ImageMessage:
+                    $line_id = $event->getUserId();
                     $replyToken = $event->getReplyToken();
                     $contentProvider = $event->getContentProvider();
                     if ($contentProvider->isExternal()) {
@@ -103,6 +122,13 @@ class WebhookController extends Controller
                     $filename = basename($filePath);
                     $url = env('APP_URL')
                     .\Illuminate\Support\Facades\Storage::url($filename);
+
+                    $photo = new LinePhoto();
+                    $photo->line_id = $line_id;
+                    $photo->path = $filePath;
+                    $photo->url = $url;
+                    $photo->save();
+
 
                     logger()->info($url);
                     //$bot->replyMessage($replyToken, new ImageMessageBuilder($url, $url));

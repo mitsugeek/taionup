@@ -17,6 +17,7 @@ class LinePhoto extends Migration
             $table->id();
             $table->string('line_id');
             $table->string('path');
+            $table->string('url');
             $table->timestamps();
         });
     }
