@@ -12,8 +12,7 @@
             <td>{{ $row->line_name }}</td>
             <td>{{ $row->name_sei }}</td>
             <td>{{ $row->name_mei }}</td>
-            <td>{{ $row->line_id }}</td>
-            <td>{{ $row->url }}</td>
+            <td>{{ $row->created_at }}</td>
             <td><img src="{{ $row->url }}" width="100px"/></td>
         </tr>
     @endforeach

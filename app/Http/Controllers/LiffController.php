@@ -52,6 +52,7 @@ class LiffController extends Controller
             ,"line_users.name_mei"
             ,"line_photos.line_id"
             ,"line_photos.url"
+            ,"line_photos.created_at"
         );
         $query->join('line_users','line_users.line_id','=','line_photos.line_id');
         $list = $query->orderBy('line_photos.id','desc')->paginate(10);
