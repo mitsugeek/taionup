@@ -52,9 +52,16 @@ class WebhookController extends Controller
                     if (!$rsp->isSucceeded()) {
                         logger()->info('failed to get profile. skip processing.');
                         $reply_message = "failed to get profile. skip processing.";
+
                     } else {
+
                         $profile = $rsp->getJSONDecodedBody();
-                        $reply_message = "lineID:".$line_id."\n"."displayName:".$profile['displayName'];
+                        $reply_message = $profile['displayName']."さん\n"
+                        ."お友達登録ありがとうございます。"
+                        ."出勤前に、体温計で体温を測り、\n"
+                        ."測った画像を写真で取ってこのトーク画面で投稿をお願い致します。";
+                        
+                        //$reply_message = "lineID:".$line_id."\n"."displayName:".$profile['displayName'];
                     }
 
                     break;
