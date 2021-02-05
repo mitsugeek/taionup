@@ -104,7 +104,7 @@ var app = new Vue({
     getUser:function(event){
       let _this = this;
       let accessToken = liff.getAccessToken();
-      axios.post("{{route('/line/getUser'}}", { token: accessToken } ,{
+      axios.post("{{route('getUser'}}", { token: accessToken } ,{
         headers:{
           'X-Requested-With': 'XMLHttpRequest',
           'Content-Type':'application / x-www-form-urlencoded'
@@ -126,7 +126,7 @@ var app = new Vue({
 
     getSession:function(event){
       let _this = this;
-      axios.get("{{route('/line/getSessionUser'}}",{withCredentials: true})
+      axios.get("{{route('getSessionUser'}}",{withCredentials: true})
       .then(function(res){
         _this.message = res.data;
         _this.userInfo = res.data;

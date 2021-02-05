@@ -22,9 +22,9 @@ Route::post('line/Webhook', [App\Http\Controllers\WebhookController::class, 'web
 
 Route::get('line/liff', [App\Http\Controllers\LiffController::class, 'home']);
 
-Route::post('line/getUser', [App\Http\Controllers\LiffController::class, 'getUserAPI']);
+Route::post('line/getUser', [App\Http\Controllers\LiffController::class, 'getUserAPI'])->name('getUser');
 
 Route::post('line/getSessionUser', function(){
     $request = request();
     return $request->session()->all(); 
-});
+})->name('getSessionUser');
