@@ -143,7 +143,7 @@ class WebhookController extends Controller
                     } else if($postbackdata == "button=0"){
                         $bot->replyText(
                             $event->getReplyToken(),
-                            "出社可能な体温ですね。回答ありがとうございました。"
+                            "ご回答ありがとうございました。"
                         );
                     }
 

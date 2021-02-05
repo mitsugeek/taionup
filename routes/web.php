@@ -19,3 +19,5 @@ Route::get('/', function () {
 
 
 Route::post('/line/Webhook', [App\Http\Controllers\WebhookController::class, 'webhook']);
+
+Route::get('line/liff', [App\Http\Controllers\LiffController::class, 'home']);
