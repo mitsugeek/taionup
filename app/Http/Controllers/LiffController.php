@@ -35,9 +35,9 @@ class LiffController extends Controller
 
         //結果を格納
         $request->session()->put('userId', $ret["userId"]);
-        $request->session()->put('displayName', $ret["displayName"]);
-        $request->session()->put('statusMessage', $ret["statusMessage"]);
-        $request->session()->put('pictureUrl', $ret["pictureUrl"]);
+        $request->session()->put('displayName', $ret["displayName"] ? "");
+        $request->session()->put('statusMessage', $ret["statusMessage"] ?? "");
+        $request->session()->put('pictureUrl', $ret["pictureUrl"] ?? "");
 
         //レスポンス
         return $ret;
