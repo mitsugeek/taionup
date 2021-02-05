@@ -45,6 +45,11 @@ class LiffController extends Controller
 
     public function TaionList(Request $request)
     {
+        $userId = $request->session()->get('userId');
+        if(!$userId){
+            abort(403);
+        }
+
         $query = LinePhoto::query();
         $query->select(
              "line_users.line_name"
