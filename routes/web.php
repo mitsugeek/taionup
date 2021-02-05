@@ -24,7 +24,7 @@ Route::get('line/liff', [App\Http\Controllers\LiffController::class, 'home']);
 
 Route::post('line/getUser', [App\Http\Controllers\LiffController::class, 'getUserAPI'])->name('getUser');
 
-Route::post('line/getSessionUser', function(){
+Route::get('line/getSessionUser', function(){
     $request = request();
     return $request->session()->all(); 
 })->name('getSessionUser');
