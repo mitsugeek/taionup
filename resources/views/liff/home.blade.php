@@ -29,13 +29,14 @@
   <hr />
 
   <button v-if="!isLogin" v-on:click="login">ログイン</button>
+<!--
   <button v-if="isLogin" v-on:click="logout">ログアウト</button>
+-->
 
   <hr />
 
-  <button v-on:click="getUser">ユーザ情報取得(サーバサイド)</button>
-  <button v-on:click="getSession">セッション情報取得(サーバサイド)</button>
-  
+  <button v-on:click="golist">体温一覧表示</button>
+
   <hr />
 
   <div>
@@ -101,7 +102,7 @@ var app = new Vue({
         this.isLogin = false;
     },
 
-    getUser:function(event){
+    golist:function(event){
       let _this = this;
       let accessToken = liff.getAccessToken();
       axios.post("{{route('getUser')}}", { token: accessToken } ,{
@@ -112,26 +113,13 @@ var app = new Vue({
         withCredentials:true,
       })
       .then(function(res){
-        console.log("then");
-        console.log(res);
-        _this.message = res.data;
-        _this.userInfo = res.data;
-        _this.pictureUrl = res.data.pictureUrl;
+        location.href="{{route('TaionList')}}";
       })
       .catch(function(res){
+        alert("エラーが発生しました。");
         console.log("error");
         console.log(res)
       })
-    },
-
-    getSession:function(event){
-      let _this = this;
-      axios.get("{{route('getSessionUser')}}",{withCredentials: true})
-      .then(function(res){
-        _this.message = res.data;
-        _this.userInfo = res.data;
-        _this.pictureUrl = res.data.pictureUrl;
-      });
     }
   }
 });
