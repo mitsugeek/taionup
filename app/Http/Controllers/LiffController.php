@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\LinePhoto;
 
 class LiffController extends Controller
 {
@@ -40,5 +41,19 @@ class LiffController extends Controller
 
         //レスポンス
         return $ret;
+    }
+
+    public function TaionList(Request $request)
+    {
+        $query = LinePhoto::query();
+        $query->select("line_users.line_name");
+        $query->select("line_users.name_sei");
+        $query->select("line_users.name_mei");
+        $query->select("line_photos.line_id");
+        $query->select("line_photos.url");
+        $query->join('line_users','line_users.line_id','=','line_photos.line_id');
+        $list = $query->orderBy('line_photos.id','desc')->paginate(10);
+        return view('liff.taionlist',compact('list'));
+
     }
 }

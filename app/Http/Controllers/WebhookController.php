@@ -122,6 +122,7 @@ class WebhookController extends Controller
                     $filename = basename($filePath);
                     $url = env('APP_URL')
                     .\Illuminate\Support\Facades\Storage::url($filename);
+                    $url = str_replace("//","/", $url);
 
                     $photo = new LinePhoto();
                     $photo->line_id = $line_id;
