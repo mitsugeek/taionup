@@ -15,9 +15,9 @@ class LinePhoto extends Migration
     {
         Schema::create('line_photos', function (Blueprint $table) {
             $table->id();
-            $table->string('line_id');
-            $table->string('path');
-            $table->string('url');
+            $table->string('line_id')->index();
+            $table->string('path')->nullable();
+            $table->string('url')->nullable();
             $table->timestamps();
         });
     }

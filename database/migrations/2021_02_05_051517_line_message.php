@@ -15,8 +15,8 @@ class LineMessage extends Migration
     {
         Schema::create('line_messages', function (Blueprint $table) {
             $table->id();
-            $table->string('line_id');
-            $table->text('message');
+            $table->string('line_id')->index();
+            $table->text('message')->nullable();
             $table->timestamps();
         });
     }

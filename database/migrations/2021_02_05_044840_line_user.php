@@ -15,10 +15,10 @@ class LineUser extends Migration
     {
         Schema::create('line_users', function (Blueprint $table) {
             $table->id();
-            $table->string('line_id');
-            $table->string('line_name');
-            $table->string('name_sei');
-            $table->string('name_mei');
+            $table->string('line_id')->index();
+            $table->string('line_name')->nullable();
+            $table->string('name_sei')->nullable();
+            $table->string('name_mei')->nullable();
             $table->timestamps();
         });
     }
