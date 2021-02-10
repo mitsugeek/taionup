@@ -74,7 +74,7 @@ class LiffController extends Controller
         }
 
         $list = LineUser::query()->paginate(10);
-        return view('liff.userlist', 'list');
+        return view('liff.userlist', compact('list'));
     }
 
     public function userUpdate(Request $request)
