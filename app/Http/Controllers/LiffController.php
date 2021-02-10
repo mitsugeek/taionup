@@ -81,7 +81,13 @@ class LiffController extends Controller
     {
         foreach($request->rows as $row)
         {
-            var_dump($row);
+            $line_id = $row["line_id"];
+            $name_sei = $row["name_sei"];
+            $name_mei = $row["name_mei"];
+            $user = LineUser::where("line_id", $line_id)->first();
+            $user->name_sei = $name_sei;
+            $user->name_mei = $name_mei;
+            $user->save();
         }
         return "";
     }
