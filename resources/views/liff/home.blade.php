@@ -10,6 +10,7 @@
     <meta property="og:url" content="{{env('APP_URL')}}">
     <meta property="og:site_name" content="{{env('APP_NAME')}}">
     <meta property="og:image" content="{{env('LOGO_URL')}}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
@@ -22,21 +23,14 @@
 </style>
 <body>
 <div id="app">
+  <button v-if="!isLogin" v-on:click="login">ログイン</button>
+
   <div v-if="displayName">
     @{{displayName}} さんようこそ。
   </div>
   
   <hr />
-
-  <button v-if="!isLogin" v-on:click="login">ログイン</button>
-<!--
-  <button v-if="isLogin" v-on:click="logout">ログアウト</button>
--->
-
-  <hr />
-
   <button v-on:click="golist">体温一覧表示</button>
-
   <hr />
 
   <div>
