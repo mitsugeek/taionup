@@ -79,7 +79,10 @@ class LiffController extends Controller
 
     public function userUpdate(Request $request)
     {
-        var_dump($request->all());
+        foreach($request->rows as $row)
+        {
+            var_dump($row);
+        }
         return "";
     }
 }
