@@ -30,3 +30,7 @@ Route::get('line/getSessionUser', function(){
     $request = request();
     return $request->session()->all(); 
 })->name('getSessionUser');
+
+
+Route::get('line/userlist', [App\Http\Controllers\LiffController::class, 'userlist']);
+Route::post('line/userlist/update', [App\Http\Controllers\LiffController::class, 'userUpdate'])->name('userUpdate');

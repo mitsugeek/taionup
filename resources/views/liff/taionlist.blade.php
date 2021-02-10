@@ -17,7 +17,14 @@
         </div>
         <div class="row">
             <div class="col">
-                <table>
+                <table class="table table-bordered">
+                    <tr>
+                        <th>名前</th>
+                        <th></th>
+                        <th></th>
+                        <th>日時</th>
+                        <th>画像</th>
+                    </tr>
                     @foreach($list as $row)
                     <tr>
                         <td>{{ $row->line_name }}</td>

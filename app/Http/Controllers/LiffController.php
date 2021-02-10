@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\LinePhoto;
+use App\Models\LineUser;
 
 class LiffController extends Controller
 {
@@ -63,5 +64,22 @@ class LiffController extends Controller
         $list = $query->orderBy('line_photos.id','desc')->paginate(10);
         return view('liff.taionlist',compact('list'));
 
+    }
+
+    public function userlist(Request $request)
+    {
+        $userId = $request->session()->get('userId');
+        if(!$userId){
+            abort(403);
+        }
+
+        $list = LineUser::all()->paginate(10);
+        return view('liff.userlist', 'list');
+    }
+
+    public function userUpdate(Request $request)
+    {
+        var_dump($request);
+        exit();
     }
 }
