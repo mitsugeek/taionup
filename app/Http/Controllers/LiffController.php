@@ -73,7 +73,7 @@ class LiffController extends Controller
             abort(403);
         }
 
-        $list = LineUser::query()->paginate(10);
+        $list = LineUser::query()->get();
         return view('liff.userlist', compact('list'));
     }
 

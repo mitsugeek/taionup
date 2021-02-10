@@ -20,6 +20,7 @@
             </tr>
             @endforeach
         </table>
+        <input type="submit" value="更新" />
     </form>
     
 </body>
