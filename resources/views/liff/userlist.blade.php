@@ -10,6 +10,7 @@
 <body>
    
     <form method="post" action="{{route("userUpdate")}}">
+        @csrf
         <table class="table">
             @foreach($list as $row)
             <tr>
