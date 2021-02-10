@@ -16,7 +16,7 @@
             <input type="hidden" name="row[{{$loop->index}}][line_id]" value="{{$row->line_id}}" />
             <tr>
                 <td>{{$row->line_name}}</td>
-                <td><input type="text" name="row[{{$loop->index}}]name_sei]" value="{{$row->name_sei}}" /></td>
+                <td><input type="text" name="row[{{$loop->index}}][name_sei]" value="{{$row->name_sei}}" /></td>
                 <td><input type="text" name="row[{{$loop->index}}][name_mei]" value="{{$row->name_mei}}" /></td>
             </tr>
             @endforeach
