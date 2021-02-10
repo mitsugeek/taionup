@@ -18,7 +18,7 @@
                 <td><input type="text" name="name_sei[]" value="{{$row->name_sei}}" /></td>
                 <td><input type="text" name="name_mei[]" value="{{$row->name_mei}}" /></td>
             </tr>
-            @endfor
+            @endforeach
         </table>
     </form>
     
