@@ -20,16 +20,16 @@
                 <table class="table table-bordered">
                     <tr>
                         <th>名前</th>
-                        <th></th>
-                        <th></th>
                         <th>日時</th>
                         <th>画像</th>
                     </tr>
                     @foreach($list as $row)
                     <tr>
-                        <td>{{ $row->line_name }}</td>
-                        <td>{{ $row->name_sei }}</td>
-                        <td>{{ $row->name_mei }}</td>
+                        @if(empty($row->name_sei))
+                            <td>{{ $row->line_name }}</td>
+                        @else
+                            <td>{{ $row->name_sei." ".$row->name_mei }}</td>
+                        @endif
                         <td>{{ $row->created_at }}</td>
                         <td><img src="{{ $row->url }}" width="100px"/></td>
                     </tr>
