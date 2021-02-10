@@ -13,11 +13,11 @@
         @csrf
         <table class="table">
             @foreach($list as $row)
+            <input type="hidden" name="row[][line_id]" value="{{$row->line_id}}" />
             <tr>
-                <td><input type="hidden" name="line_id[]" value="line_id" />
                 <td>{{$row->line_name}}</td>
-                <td><input type="text" name="name_sei[]" value="{{$row->name_sei}}" /></td>
-                <td><input type="text" name="name_mei[]" value="{{$row->name_mei}}" /></td>
+                <td><input type="text" name="row[][name_sei]" value="{{$row->name_sei}}" /></td>
+                <td><input type="text" name="row[][name_mei]" value="{{$row->name_mei}}" /></td>
             </tr>
             @endforeach
         </table>
